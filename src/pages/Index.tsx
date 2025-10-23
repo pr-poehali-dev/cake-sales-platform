@@ -11,6 +11,7 @@ interface Product {
   price: number;
   description: string;
   image: string;
+  category: 'desserts' | 'meat';
 }
 
 interface CartItem extends Product {
@@ -23,48 +24,70 @@ const products: Product[] = [
     name: 'Шоколадный вихрь',
     price: 2500,
     description: 'Нежный шоколадный торт с кремом из кешью и какао',
-    image: 'https://cdn.poehali.dev/projects/6c4cef6e-3f0c-4613-8a3b-b439a9576d0a/files/c56e6950-f13e-4ae3-b96b-94842aedfdb3.jpg'
+    image: 'https://cdn.poehali.dev/projects/6c4cef6e-3f0c-4613-8a3b-b439a9576d0a/files/c56e6950-f13e-4ae3-b96b-94842aedfdb3.jpg',
+    category: 'desserts'
   },
   {
     id: 2,
     name: 'Малиновая медитация',
     price: 2800,
     description: 'Воздушный бисквит с малиновым муссом и фисташками',
-    image: 'https://cdn.poehali.dev/projects/6c4cef6e-3f0c-4613-8a3b-b439a9576d0a/files/5ec246e2-193e-4ba1-8505-dc6ede7d9065.jpg'
+    image: 'https://cdn.poehali.dev/projects/6c4cef6e-3f0c-4613-8a3b-b439a9576d0a/files/5ec246e2-193e-4ba1-8505-dc6ede7d9065.jpg',
+    category: 'desserts'
   },
   {
     id: 3,
     name: 'Лимонное просветление',
     price: 2400,
     description: 'Освежающий лимонный торт с кокосовым кремом',
-    image: 'https://cdn.poehali.dev/projects/6c4cef6e-3f0c-4613-8a3b-b439a9576d0a/files/5f878890-9a50-43d1-aae0-e66529ff4288.jpg'
+    image: 'https://cdn.poehali.dev/projects/6c4cef6e-3f0c-4613-8a3b-b439a9576d0a/files/5f878890-9a50-43d1-aae0-e66529ff4288.jpg',
+    category: 'desserts'
   },
   {
     id: 4,
     name: 'Ягодное вращение',
     price: 3000,
     description: 'Ассорти из лесных ягод с ванильным кремом',
-    image: 'https://cdn.poehali.dev/projects/6c4cef6e-3f0c-4613-8a3b-b439a9576d0a/files/5ec246e2-193e-4ba1-8505-dc6ede7d9065.jpg'
+    image: 'https://cdn.poehali.dev/projects/6c4cef6e-3f0c-4613-8a3b-b439a9576d0a/files/5ec246e2-193e-4ba1-8505-dc6ede7d9065.jpg',
+    category: 'desserts'
   },
   {
     id: 5,
     name: 'Манго сансара',
     price: 2900,
     description: 'Тропический торт с манго и маракуйей',
-    image: 'https://cdn.poehali.dev/projects/6c4cef6e-3f0c-4613-8a3b-b439a9576d0a/files/5f878890-9a50-43d1-aae0-e66529ff4288.jpg'
+    image: 'https://cdn.poehali.dev/projects/6c4cef6e-3f0c-4613-8a3b-b439a9576d0a/files/5f878890-9a50-43d1-aae0-e66529ff4288.jpg',
+    category: 'desserts'
   },
   {
     id: 6,
     name: 'Фисташковый танец',
     price: 3200,
     description: 'Изысканный торт с фисташковым кремом и розой',
-    image: 'https://cdn.poehali.dev/projects/6c4cef6e-3f0c-4613-8a3b-b439a9576d0a/files/c56e6950-f13e-4ae3-b96b-94842aedfdb3.jpg'
+    image: 'https://cdn.poehali.dev/projects/6c4cef6e-3f0c-4613-8a3b-b439a9576d0a/files/c56e6950-f13e-4ae3-b96b-94842aedfdb3.jpg',
+    category: 'desserts'
+  },
+  {
+    id: 7,
+    name: 'Пельмени',
+    price: 450,
+    description: 'Сочные веганские пельмени с растительным мясом',
+    image: '/placeholder.svg',
+    category: 'meat'
+  },
+  {
+    id: 8,
+    name: 'Фарш',
+    price: 380,
+    description: 'Растительный фарш для любых блюд',
+    image: '/placeholder.svg',
+    category: 'meat'
   }
 ];
 
 export default function Index() {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [currentSection, setCurrentSection] = useState('home');
+  const [currentSection, setCurrentSection] = useState('desserts');
 
   const addToCart = (product: Product) => {
     setCart(prevCart => {
@@ -102,9 +125,11 @@ export default function Index() {
     return cart.reduce((sum, item) => sum + item.quantity, 0);
   };
 
+  const filteredProducts = products.filter(p => p.category === currentSection);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-accent/20 to-secondary/30">
-      <nav className="sticky top-0 z-50 bg-card/80 backdrop-blur-md border-b border-border">
+    <div className="min-h-screen bg-background">
+      <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -116,20 +141,20 @@ export default function Index() {
 
             <div className="hidden md:flex items-center gap-6">
               <button
-                onClick={() => setCurrentSection('home')}
+                onClick={() => setCurrentSection('desserts')}
                 className={`text-sm font-medium transition-colors ${
-                  currentSection === 'home' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+                  currentSection === 'desserts' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
-                Главная
+                Десерты
               </button>
               <button
-                onClick={() => setCurrentSection('catalog')}
+                onClick={() => setCurrentSection('meat')}
                 className={`text-sm font-medium transition-colors ${
-                  currentSection === 'catalog' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+                  currentSection === 'meat' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
-                Каталог
+                Растительное мясо
               </button>
               <button
                 onClick={() => setCurrentSection('about')}
@@ -137,23 +162,7 @@ export default function Index() {
                   currentSection === 'about' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
-                О нас
-              </button>
-              <button
-                onClick={() => setCurrentSection('delivery')}
-                className={`text-sm font-medium transition-colors ${
-                  currentSection === 'delivery' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                Доставка
-              </button>
-              <button
-                onClick={() => setCurrentSection('contacts')}
-                className={`text-sm font-medium transition-colors ${
-                  currentSection === 'contacts' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                Контакты
+                О нас и доставка
               </button>
             </div>
 
@@ -228,42 +237,23 @@ export default function Index() {
         </div>
       </nav>
 
-      {currentSection === 'home' && (
-        <section className="py-20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center space-y-6">
-              <div className="inline-block">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center spin-slow mx-auto mb-6">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center spin-reverse">
-                    <span className="text-4xl">✨</span>
-                  </div>
-                </div>
-              </div>
-              <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                Веганские торты с душой
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Каждый торт — это медитация вкуса. Создано с любовью, без продуктов животного происхождения.
-              </p>
-              <Button
-                size="lg"
-                onClick={() => setCurrentSection('catalog')}
-                className="mt-4"
-              >
-                Смотреть каталог
-                <Icon name="ArrowRight" size={20} className="ml-2" />
-              </Button>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {currentSection === 'catalog' && (
+      {(currentSection === 'desserts' || currentSection === 'meat') && (
         <section className="py-12">
           <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center mb-12">Наши торты</h2>
+            <div className="text-center mb-12 space-y-4">
+              <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary/20 to-accent/30 flex items-center justify-center mb-6">
+                <span className="text-6xl">{currentSection === 'desserts' ? '🌙' : '🥟'}</span>
+              </div>
+              <h2 className="text-5xl font-bold">{currentSection === 'desserts' ? 'Десерты' : 'Растительное мясо'}</h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                {currentSection === 'desserts' 
+                  ? 'Веганские торты, созданные с любовью и вдохновением' 
+                  : 'Полезная альтернатива мясу на растительной основе'}
+              </p>
+            </div>
+            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((product, index) => (
+              {filteredProducts.map((product, index) => (
                 <Card key={product.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                   <div className="relative overflow-hidden group">
                     <img
@@ -296,102 +286,92 @@ export default function Index() {
       {currentSection === 'about' && (
         <section className="py-20">
           <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center space-y-6">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center float mx-auto mb-6">
-                <Icon name="Heart" size={32} className="text-primary" />
+            <div className="max-w-4xl mx-auto space-y-16">
+              <div className="text-center space-y-6">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center float mx-auto mb-6">
+                  <Icon name="Heart" size={32} className="text-primary" />
+                </div>
+                <h2 className="text-4xl font-bold">О нас</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  ishq — это любовь к жизни, выраженная через веганскую кондитерскую. Мы верим, что десерты могут быть вкусными, красивыми и этичными одновременно. Каждый торт создаётся вручную с использованием только растительных ингредиентов высочайшего качества.
+                </p>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Вдохновлённые суфийскими традициями кружения, мы вкладываем в каждое изделие медитативную энергию и любовь.
+                </p>
               </div>
-              <h2 className="text-4xl font-bold">О нас</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                ishq — это любовь к жизни, выраженная через веганскую кондитерскую. Мы верим, что десерты могут быть вкусными, красивыми и этичными одновременно. Каждый торт создаётся вручную с использованием только растительных ингредиентов высочайшего качества.
-              </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Вдохновлённые суфийскими традициями кружения, мы вкладываем в каждое изделие медитативную энергию и любовь. Наши торты — это не просто десерт, это опыт, который объединяет вкус, красоту и сознательность.
-              </p>
-            </div>
-          </div>
-        </section>
-      )}
 
-      {currentSection === 'delivery' && (
-        <section className="py-20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto space-y-8">
-              <h2 className="text-4xl font-bold text-center mb-12">Доставка</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                <Card className="p-6">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                    <Icon name="Truck" size={24} className="text-primary" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">Курьерская доставка</h3>
-                  <p className="text-muted-foreground">По Москве — 400 ₽. Бесплатно при заказе от 5000 ₽</p>
-                </Card>
-                <Card className="p-6">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                    <Icon name="Clock" size={24} className="text-primary" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">Время доставки</h3>
-                  <p className="text-muted-foreground">В день заказа или на следующий день с 10:00 до 22:00</p>
-                </Card>
-                <Card className="p-6">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                    <Icon name="MapPin" size={24} className="text-primary" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">Самовывоз</h3>
-                  <p className="text-muted-foreground">Бесплатно из нашей кондитерской на ул. Цветочная, 25</p>
-                </Card>
-                <Card className="p-6">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                    <Icon name="Package" size={24} className="text-primary" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">Упаковка</h3>
-                  <p className="text-muted-foreground">Каждый торт упаковывается в экологичную коробку</p>
-                </Card>
+              <div className="border-t pt-16">
+                <h2 className="text-4xl font-bold text-center mb-12">Доставка</h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Card className="p-6">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                      <Icon name="Truck" size={24} className="text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2">Курьерская доставка</h3>
+                    <p className="text-muted-foreground">По Москве — 400 ₽. Бесплатно при заказе от 5000 ₽</p>
+                  </Card>
+                  <Card className="p-6">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                      <Icon name="Clock" size={24} className="text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2">Время доставки</h3>
+                    <p className="text-muted-foreground">В день заказа или на следующий день с 10:00 до 22:00</p>
+                  </Card>
+                  <Card className="p-6">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                      <Icon name="MapPin" size={24} className="text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2">Самовывоз</h3>
+                    <p className="text-muted-foreground">Бесплатно из нашей кондитерской на ул. Цветочная, 25</p>
+                  </Card>
+                  <Card className="p-6">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                      <Icon name="Package" size={24} className="text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2">Упаковка</h3>
+                    <p className="text-muted-foreground">Каждый торт упаковывается в экологичную коробку</p>
+                  </Card>
+                </div>
               </div>
-            </div>
-          </div>
-        </section>
-      )}
 
-      {currentSection === 'contacts' && (
-        <section className="py-20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto text-center space-y-8">
-              <h2 className="text-4xl font-bold mb-12">Контакты</h2>
-              <div className="space-y-6">
-                <div className="flex items-center justify-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Icon name="Phone" size={24} className="text-primary" />
+              <div className="border-t pt-16 text-center">
+                <h2 className="text-4xl font-bold mb-12">Контакты</h2>
+                <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Icon name="Phone" size={24} className="text-primary" />
+                    </div>
+                    <div className="text-left">
+                      <p className="text-sm text-muted-foreground">Телефон</p>
+                      <p className="text-lg font-semibold">+7 (495) 123-45-67</p>
+                    </div>
                   </div>
-                  <div className="text-left">
-                    <p className="text-sm text-muted-foreground">Телефон</p>
-                    <p className="text-lg font-semibold">+7 (495) 123-45-67</p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Icon name="Mail" size={24} className="text-primary" />
+                    </div>
+                    <div className="text-left">
+                      <p className="text-sm text-muted-foreground">Email</p>
+                      <p className="text-lg font-semibold">hello@ishq.ru</p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center justify-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Icon name="Mail" size={24} className="text-primary" />
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Icon name="MapPin" size={24} className="text-primary" />
+                    </div>
+                    <div className="text-left">
+                      <p className="text-sm text-muted-foreground">Адрес</p>
+                      <p className="text-lg font-semibold">Москва, ул. Цветочная, 25</p>
+                    </div>
                   </div>
-                  <div className="text-left">
-                    <p className="text-sm text-muted-foreground">Email</p>
-                    <p className="text-lg font-semibold">hello@ishq.ru</p>
-                  </div>
-                </div>
-                <div className="flex items-center justify-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Icon name="MapPin" size={24} className="text-primary" />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-sm text-muted-foreground">Адрес</p>
-                    <p className="text-lg font-semibold">Москва, ул. Цветочная, 25</p>
-                  </div>
-                </div>
-                <div className="flex items-center justify-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Icon name="Instagram" size={24} className="text-primary" />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-sm text-muted-foreground">Instagram</p>
-                    <p className="text-lg font-semibold">@ishq_cakes</p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Icon name="Instagram" size={24} className="text-primary" />
+                    </div>
+                    <div className="text-left">
+                      <p className="text-sm text-muted-foreground">Instagram</p>
+                      <p className="text-lg font-semibold">@ishq_cakes</p>
+                    </div>
                   </div>
                 </div>
               </div>
