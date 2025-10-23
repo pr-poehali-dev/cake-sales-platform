@@ -111,7 +111,7 @@ export default function Index() {
               <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center spin-slow">
                 <span className="text-2xl">🌙</span>
               </div>
-              <h1 className="text-3xl font-bold text-primary">ishq</h1>
+              <h1 className="text-3xl font-bold text-primary" style={{ fontFamily: "'Eagle Lake', cursive" }}>ishq</h1>
             </div>
 
             <div className="hidden md:flex items-center gap-6">
@@ -406,7 +406,7 @@ export default function Index() {
             <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center spin-slow">
               <span className="text-sm">🌙</span>
             </div>
-            <span className="font-semibold text-foreground">ishq</span>
+            <span className="font-semibold text-foreground" style={{ fontFamily: "'Eagle Lake', cursive" }}>ishq</span>
           </div>
           <p className="text-sm">Веганские торты с любовью © 2024</p>
         </div>
