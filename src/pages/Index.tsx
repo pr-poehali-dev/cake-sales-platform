@@ -239,8 +239,9 @@ export default function Index() {
                     </>
                   )}
                 </div>
-              </SheetContent>
-            </Sheet>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </div>
       </nav>
