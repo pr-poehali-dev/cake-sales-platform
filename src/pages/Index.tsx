@@ -137,36 +137,46 @@ export default function Index() {
               <h1 className="text-3xl font-bold text-primary" style={{ fontFamily: "'Eagle Lake', cursive" }}>ishq</h1>
             </div>
 
-            <div className="hidden md:flex items-center gap-6">
-              <button
-                onClick={() => setCurrentSection('desserts')}
-                className={`text-sm font-medium transition-colors ${
-                  currentSection === 'desserts' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                Десерты
-              </button>
-              <button
-                onClick={() => setCurrentSection('meat')}
-                className={`text-sm font-medium transition-colors ${
-                  currentSection === 'meat' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                Растительное мясо
-              </button>
-              <button
-                onClick={() => setCurrentSection('about')}
-                className={`text-sm font-medium transition-colors ${
-                  currentSection === 'about' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                О нас и доставка
-              </button>
-            </div>
+            <div className="flex items-center gap-6">
+              <div className="hidden md:flex items-center gap-6">
+                <button
+                  onClick={() => setCurrentSection('desserts')}
+                  className={`text-sm font-medium transition-colors ${
+                    currentSection === 'desserts' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  Десерты
+                </button>
+                <button
+                  onClick={() => setCurrentSection('meat')}
+                  className={`text-sm font-medium transition-colors ${
+                    currentSection === 'meat' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  Растительное мясо
+                </button>
+                <button
+                  onClick={() => setCurrentSection('about')}
+                  className={`text-sm font-medium transition-colors ${
+                    currentSection === 'about' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  О нас и доставка
+                </button>
+              </div>
 
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="outline" size="icon" className="relative">
+              <div className="hidden md:flex flex-col items-end text-sm mr-4">
+                <a href="tel:+74951234567" className="text-muted-foreground hover:text-foreground transition-colors">
+                  +7 (495) 123-45-67
+                </a>
+                <a href="mailto:hello@ishq.ru" className="text-muted-foreground hover:text-foreground transition-colors">
+                  hello@ishq.ru
+                </a>
+              </div>
+
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="outline" size="icon" className="relative">
                   <Icon name="ShoppingCart" size={20} />
                   {getTotalItems() > 0 && (
                     <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs">
@@ -174,8 +184,8 @@ export default function Index() {
                     </Badge>
                   )}
                 </Button>
-              </SheetTrigger>
-              <SheetContent className="w-full sm:max-w-lg">
+                </SheetTrigger>
+                <SheetContent className="w-full sm:max-w-lg">
                 <SheetHeader>
                   <SheetTitle>Корзина</SheetTitle>
                 </SheetHeader>
@@ -239,7 +249,7 @@ export default function Index() {
         <section className="py-12">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12 space-y-4">
-              <div className="w-32 h-32 mx-auto flex items-center justify-center mb-6">
+              <div className="w-64 h-64 mx-auto flex items-center justify-center mb-8">
                 <img src="https://cdn.poehali.dev/files/cf0924be-28ae-4dfb-a9cc-e6d7222a6280.png" alt="ishq logo" className="w-full h-full object-contain" />
               </div>
               <h2 className="text-5xl font-bold">{currentSection === 'desserts' ? 'Десерты' : 'Растительное мясо'}</h2>
