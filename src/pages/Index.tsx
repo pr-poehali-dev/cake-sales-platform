@@ -132,10 +132,8 @@ export default function Index() {
       <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center spin-slow">
-                <span className="text-2xl">🌙</span>
-              </div>
+            <div className="flex items-center gap-3">
+              <img src="https://cdn.poehali.dev/files/cf0924be-28ae-4dfb-a9cc-e6d7222a6280.png" alt="ishq logo" className="w-12 h-12 object-contain" />
               <h1 className="text-3xl font-bold text-primary" style={{ fontFamily: "'Eagle Lake', cursive" }}>ishq</h1>
             </div>
 
@@ -241,8 +239,8 @@ export default function Index() {
         <section className="py-12">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12 space-y-4">
-              <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary/20 to-accent/30 flex items-center justify-center mb-6">
-                <span className="text-6xl">{currentSection === 'desserts' ? '🌙' : '🥟'}</span>
+              <div className="w-32 h-32 mx-auto flex items-center justify-center mb-6">
+                <img src="https://cdn.poehali.dev/files/cf0924be-28ae-4dfb-a9cc-e6d7222a6280.png" alt="ishq logo" className="w-full h-full object-contain" />
               </div>
               <h2 className="text-5xl font-bold">{currentSection === 'desserts' ? 'Десерты' : 'Растительное мясо'}</h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -383,9 +381,7 @@ export default function Index() {
       <footer className="border-t mt-20 py-8">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center spin-slow">
-              <span className="text-sm">🌙</span>
-            </div>
+            <img src="https://cdn.poehali.dev/files/cf0924be-28ae-4dfb-a9cc-e6d7222a6280.png" alt="ishq logo" className="w-6 h-6 object-contain" />
             <span className="font-semibold text-foreground" style={{ fontFamily: "'Eagle Lake', cursive" }}>ishq</span>
           </div>
           <p className="text-sm">Веганские торты с любовью © 2024</p>
